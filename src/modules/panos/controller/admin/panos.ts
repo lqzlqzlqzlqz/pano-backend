@@ -9,6 +9,9 @@ import { ProjectEntity } from '../../../project/entity/project';
   entity: PanoInfoEntity,
   pageQueryOp: {
     select: ['a.*', 'b.mapSrc', 'b.name'],
+    fieldEq: [
+      {column: 'a.projectId', requestParam: 'projectId'}
+    ],
     join: [
       {
         entity: ProjectEntity,
