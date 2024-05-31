@@ -1,6 +1,7 @@
-import { CoolConfig } from '@cool-midway/core';
+import { CoolConfig, MODETYPE } from '@cool-midway/core';
 import { MidwayConfig } from '@midwayjs/core';
 import { CoolCacheStore } from '@cool-midway/core';
+import { qiniuConfig } from './qiniu.config';
 
 // redis缓存
 // import { redisStore } from 'cache-manager-ioredis-yet';
@@ -54,7 +55,17 @@ export default {
   // },
   cool: {
     // 已经插件化，本地文件上传查看 plugin/config.ts，其他云存储查看对应插件的使用
-    file: {},
+    file: {
+      // 上传模式 本地上传或云存储
+			mode: MODETYPE.CLOUD,
+			qiniu: {
+				accessKeyId: qiniuConfig.accessKeyId,
+				accessKeySecret: qiniuConfig.accessKeySecret,
+				bucket: qiniuConfig.bucket,
+				region: qiniuConfig.region,
+				publicDomain: qiniuConfig.publicDomain
+			}
+    },
     // crud配置
     crud: {
       // 插入模式，save不会校验字段(允许传入不存在的字段)，insert会校验字段

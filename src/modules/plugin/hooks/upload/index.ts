@@ -36,6 +36,7 @@ export class PluginUpload extends BasePluginHook implements BaseUpload {
    * @param fileName
    */
   async downAndUpload(url: string, fileName?: string) {
+    console.log(1, "--------------------------");
     const { domain } = this.pluginInfo.config;
     // 从url获取扩展名
     const extend = path.extname(url);
@@ -70,6 +71,7 @@ export class PluginUpload extends BasePluginHook implements BaseUpload {
    * @param key 路径一致会覆盖源文件
    */
   async uploadWithKey(filePath: any, key: any) {
+    console.log(2, "--------------------------");
     const { domain } = this.pluginInfo.config;
     const data = fs.readFileSync(filePath);
     fs.writeFileSync(path.join(this.app.getBaseDir(), '..', key), data);
@@ -82,6 +84,7 @@ export class PluginUpload extends BasePluginHook implements BaseUpload {
    * @param key 文件路径
    */
   async upload(ctx: any) {
+    console.log(3, "--------------------------");
     const { domain } = this.pluginInfo.config;
     try {
       const { key } = ctx.fields;

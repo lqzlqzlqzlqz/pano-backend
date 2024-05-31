@@ -12,6 +12,7 @@ import * as cool from '@cool-midway/core';
 import { ILogger } from '@midwayjs/logger';
 import * as upload from '@midwayjs/upload';
 import { IMidwayApplication } from '@midwayjs/core';
+import * as file from "@cool-midway/file";
 // import * as swagger from '@midwayjs/swagger';
 // import * as rpc from '@cool-midway/rpc';
 // import * as task from '@cool-midway/task';
@@ -32,9 +33,9 @@ import { IMidwayApplication } from '@midwayjs/core';
     validate,
     // 本地任务 http://www.midwayjs.org/docs/extensions/cron
     cron,
-    // 文件上传
-    upload,
-    // cool-admin 官方组件 https://cool-js.com
+    // // 文件上传
+    // upload,
+    // // cool-admin 官方组件 https://cool-js.com
     cool,
     // rpc 微服务 远程调用
     // rpc,
@@ -42,6 +43,7 @@ import { IMidwayApplication } from '@midwayjs/core';
     // task,
     // swagger 文档  http://www.midwayjs.org/docs/extensions/swagger
     // swagger,
+    file,
     {
       component: info,
       enabledEnvironment: ['local'],

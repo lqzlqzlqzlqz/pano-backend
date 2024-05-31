@@ -6,6 +6,10 @@ import { BaseSysPermsService } from '../../service/sys/perms';
 import { BaseSysUserService } from '../../service/sys/user';
 import { Context } from '@midwayjs/koa';
 import { PluginService } from '../../../plugin/service/info';
+import { CoolFile } from "@cool-midway/file";
+import { qiniuConfig } from '../../../../config/qiniu.config';
+import axios from 'axios';
+import { FileStorageService } from '../../service/sys/file';
 
 /**
  * Base 通用接口 一般写不需要权限过滤的接口
@@ -24,6 +28,12 @@ export class BaseCommController extends BaseController {
 
   @Inject()
   ctx: Context;
+
+  @Inject()
+	file: CoolFile;
+
+  @Inject()
+  fileStorageService: FileStorageService;
 
   @Inject()
   pluginService: PluginService;
@@ -62,8 +72,14 @@ export class BaseCommController extends BaseController {
    */
   @Post('/upload', { summary: '文件上传' })
   async upload() {
-    const file = await this.pluginService.getInstance('upload');
-    return this.ok(await file.upload(this.ctx));
+    const form = new FormData();
+    const qiniuTokenData: {
+      uploadUrl?: string;
+      publicDomain?: string;
+      token?: string;
+      fileKey?: string;
+    } = await this.file.upload(this.ctx);
+    return this.ok(await this.fileStorageService.uploadFile(this.ctx, qiniuTokenData));
   }
 
   /**
