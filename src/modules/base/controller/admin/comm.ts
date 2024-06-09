@@ -72,7 +72,6 @@ export class BaseCommController extends BaseController {
    */
   @Post('/upload', { summary: '文件上传' })
   async upload() {
-    const form = new FormData();
     const qiniuTokenData: {
       uploadUrl?: string;
       publicDomain?: string;

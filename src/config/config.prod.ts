@@ -9,13 +9,13 @@ export default {
     dataSource: {
       default: {
         type: 'mysql',
-        host: '47.110.240.172',
+        host: '114.55.1.149',
         port: 3306,
         username: 'root',
-        password: 'root',
-        database: 'cool',
+        password: 'Newpass123$',
+        database: 'pano',
         // 自动建表 注意：线上部署的时候不要使用，有可能导致数据丢失
-        synchronize: true,
+        synchronize: false,
         // 打印日志
         logging: false,
         // 字符集
