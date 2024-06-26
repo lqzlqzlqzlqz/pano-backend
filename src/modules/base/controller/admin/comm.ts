@@ -81,6 +81,17 @@ export class BaseCommController extends BaseController {
     return this.ok(await this.fileStorageService.uploadFile(this.ctx, qiniuTokenData));
   }
 
+  @Get('/qiniuUpload', { summary: '七牛云token' })
+  async qiniuUpload() {
+    const qiniuTokenData: {
+      uploadUrl?: string;
+      publicDomain?: string;
+      token?: string;
+      fileKey?: string;
+    } = await this.file.upload(this.ctx);
+    return this.ok(qiniuTokenData);
+  }
+
   /**
    * 文件上传模式，本地或者云存储
    */

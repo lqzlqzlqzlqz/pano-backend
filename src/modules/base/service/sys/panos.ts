@@ -47,7 +47,7 @@ export class PanosService extends BaseService {
     );
     promise.push(
       this.panoInfoEntity
-        .find({ where: { projectId: info.projectId } })
+        .find({ where: { projectId: info.projectId }, order: { no: 'ASC' } })
         .then(res => {
           detail.panosList = res;
         })

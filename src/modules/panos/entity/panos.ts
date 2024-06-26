@@ -18,10 +18,10 @@ export class PanoInfoEntity extends BaseEntity {
   @Column({ comment: '相对于地图的位置', type: 'json', nullable: true })
   position: any;
 
-  @Column({ comment: '缩略图' })
+  @Column({ comment: '缩略图', nullable: true })
   thumb: string;
 
-  @Column({ comment: '路由' })
+  @Column({ comment: '路由', nullable: true })
   route: string;
 
   @Column({ comment: '描述', nullable: true })
@@ -29,4 +29,7 @@ export class PanoInfoEntity extends BaseEntity {
 
   @Column({ comment: '背景音乐地址', nullable: true })
   music: string;
+
+  @Column({ comment: '序号 no', type: 'int', nullable: true })
+  no: number;
 }
