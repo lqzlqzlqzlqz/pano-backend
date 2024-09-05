@@ -44,4 +44,7 @@ export class MarkersEntity extends BaseEntity {
 
   @Column({ comment: 'polygon', type: 'json', nullable: true })
   polygon: any;
+
+  @Column({ comment: '箭头id', type: 'int', nullable: true })
+  arrowId: number;
 }

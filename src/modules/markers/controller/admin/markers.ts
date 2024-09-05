@@ -1,6 +1,7 @@
 import { CoolController, BaseController } from '@cool-midway/core';
 import { MarkersEntity } from '../../entity/project';
 import { PanoInfoEntity } from '../../../panos/entity/panos';
+import { ArrowsEntity } from '../../../arrows/entity/base';
 /**
  * 项目
  */
@@ -8,7 +9,7 @@ import { PanoInfoEntity } from '../../../panos/entity/panos';
   api: ['add', 'delete', 'update', 'info', 'list', 'page'],
   entity: MarkersEntity,
   listQueryOp: {
-    select: ['a.*'],
+    select: ['a.*', 'c.path'],
     fieldEq: [
       {
         column: 'a.panoId',
@@ -20,6 +21,12 @@ import { PanoInfoEntity } from '../../../panos/entity/panos';
         entity: PanoInfoEntity,
         alias: 'b',
         condition: 'a.panoId = b.id',
+        type: 'leftJoin',
+      },
+      {
+        entity: ArrowsEntity,
+        alias: 'c',
+        condition: 'a.arrowId = c.id',
         type: 'leftJoin',
       },
     ],

@@ -7,6 +7,7 @@ import { Repository } from 'typeorm';
 import { ProjectEntity } from '../../../project/entity/project';
 import { PanoInfoEntity } from '../../../panos/entity/panos';
 import { MarkersEntity } from '../../../markers/entity/project';
+import { ArrowsEntity } from '../../../arrows/entity/base';
 /**
  * 全景图
  */
@@ -53,9 +54,19 @@ export class PanosService extends BaseService {
         })
     );
     promise.push(
-      this.markersEntity.find({ where: { panoId: info.panoId } }).then(res => {
-        detail.markersList = res;
-      })
+      // this.markersEntity.find({ where: { panoId: info.panoId } }).then(res => {
+      //   detail.markersList = res;
+      // })
+      this.markersEntity
+        .createQueryBuilder('marker')
+        .leftJoinAndSelect(ArrowsEntity, 'arrow', 'marker.arrowId = arrow.id')
+        .select(['marker.*', 'arrow.path AS path', 'arrow.name AS name'])
+        .where('marker.panoId= :panoId', { panoId: info.panoId })
+        .getRawMany()
+        .then(res => {
+          console.log(res);
+          detail.markersList = res;
+        })
     );
 
     await Promise.all(promise);
